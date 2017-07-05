@@ -10,13 +10,13 @@ define(function() {
       return '//archive.org/download/' + item + '/' + filename;
     },
     fetchBlob: function(item, filename) {
-      return fetch(this.getURL(item, filename))
+      return fetch(this.getFetchURL(item, filename))
       .then(function(request) {
         return request.blob();
       });
     },
     fetchXml: function(item, filename) {
-      return fetch(this.getURL(item, filename))
+      return fetch(this.getFetchURL(item, filename))
       .then(function(request) {
         return request.text();
       })
