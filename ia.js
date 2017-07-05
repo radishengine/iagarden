@@ -3,8 +3,11 @@ define(function() {
   'use strict';
   
   return {
-    getURL: function(item, filename) {
+    getFetchURL: function(item, filename) {
       return '//cors.archive.org/cors/' + item + '/' + filename;
+    },
+    getLinkURL: function(item, filename) {
+      return '//archive.org/download/' + item + '/' + filename;
     },
     fetchBlob: function(item, filename) {
       return fetch(this.getURL(item, filename))
