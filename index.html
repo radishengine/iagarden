@@ -20,9 +20,13 @@
         box-shadow: 0 -10px 5px rgba(0,0,0, 0.1) inset, 0 3px 3px white inset;
         background: #eee;
         font-weight: bold;
+        cursor: pointer;
       }
       .file:hover {
         background: #fff;
+      }
+      .file:active {
+        filter: invert(100%);
       }
       .file[data-format=Metadata], .file[data-source=derivative] {
         display: none;
