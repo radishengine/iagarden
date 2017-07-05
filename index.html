@@ -30,7 +30,7 @@
       .file:active {
         filter: invert(100%) drop-shadow(0 0 5px black);
       }
-      .file[data-format=Metadata], .file[data-source=derivative] {
+      .file[data-format=Metadata], .file[data-source=derivative], .file[data-format=Archive\ BitTorrent] {
         display: none;
       }
       .file::before {
@@ -44,6 +44,9 @@
       }
       .file[data-format=Amiga\ Disk\ File]::before {
         content: '\1F4BE';
+      }
+      .file[data-format=ISO\ Image]::before {
+        content: '\1F4BF';
       }
     </style>
   </head>
