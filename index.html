@@ -17,6 +17,12 @@
         font-size: 9pt;
         padding: 3px;
         text-align: center;
+        box-shadow: 0 -10px 5px rgba(0,0,0, 0.1) inset, 0 3px 3px white inset;
+        background: #eee;
+        font-weight: bold;
+      }
+      .file:hover {
+        background: #fff;
       }
       .file[data-format=Metadata], .file[data-source=derivative] {
         display: none;
@@ -25,6 +31,7 @@
         content: '\1F4C3';
         display: block;
         font-size: 50px;
+        font-weight: normal;
       }
       .file[data-format=JPEG]::before {
         content: '\1F3A8';
