@@ -12,6 +12,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     localStorage.setItem('lastValidHash', '#/' + hash[1] + '/' + hash[2]);
     var itemName = hash[1];
     var fileContainer = document.getElementById('files');
+    while (fileContainer.lastChild) fileContainer.removeChild(fileContainer.lastChild);
     ia.fetchFileList(itemName).then(function(files) {
       files.forEach(function(fileInfo) {
         var element = document.createElement('A');
