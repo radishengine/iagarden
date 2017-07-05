@@ -52,7 +52,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
         // element.setAttribute('href', '#/' + itemName + '/' + fileInfo.name);
         element.className = 'file';
         Object.assign(element.dataset, fileInfo);
-        element.innerText = sensitive[2];
+        element.innerText = sensitiveMatch[2];
         fileContainer.appendChild(element);
       });
       if (!fileContainer.firstElementChild && insensitiveMatch) {
