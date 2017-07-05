@@ -5,7 +5,7 @@ requirejs(['domReady', 'ia'], function(domReady, ia) {
   var itemElements = document.querySelectorAll('[data-ia-item]');
   
   function initItemElement(el) {
-    ia.fileList(el.dataset.iaItem)
+    ia.fetchFileList(el.dataset.iaItem)
     .then(function(files) {
       files.forEach(function(fileInfo) {
         var element = document.createElement('DIV');
