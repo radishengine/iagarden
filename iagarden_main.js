@@ -1,4 +1,4 @@
-requirejs(['domReady', 'ia'], function(domReady, ia) {
+requirejs(['domReady!', 'ia'], function(domReady, ia) {
 
   'use strict';
   
@@ -8,7 +8,13 @@ requirejs(['domReady', 'ia'], function(domReady, ia) {
     ia.fetchFileList(el.dataset.iaItem)
     .then(function(files) {
       files.forEach(function(fileInfo) {
-        var element = document.createElement('DIV');
+        var element = document.createElement('A');
+        if (fileInfo.format === 'JPEG') {
+          element.setAttribute('href', ia.getLinkURL(el.dataset.iaItem, fileInfo.name));
+        }
+        else {
+          element.setAttribute('href', '#' + el.dataset.iaItem + '/' + fileInfo.name);
+        }
         element.className = 'file';
         Object.assign(element.dataset, fileInfo);
         element.innerText = fileInfo.name;
