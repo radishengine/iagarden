@@ -19,11 +19,11 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     while (fileContainer.lastChild) fileContainer.removeChild(fileContainer.lastChild);
     var sensitive, insensitive;
     if (!hash[2]) {
-      sensitive = insensitive = /^(.*)$/;
+      sensitive = insensitive = /^()(.*)$/;
     }
     else {
-      sensitive = new RegExp('^(' + hash[2] + ')/(.+)$');
-      insensitive = new RegExp('^(' + hash[2] + ')/(.+)$', 'i');
+      sensitive = new RegExp('^(' + hash[2] + '/)(.+)$');
+      insensitive = new RegExp('^(' + hash[2] + '/)(.+)$', 'i');
     }
     var subfolders = Object.create(null);
     ia.fetchFileList(itemName).then(function(files) {
@@ -40,7 +40,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
           if (!(subfolder in subfolders)) {
             subfolders[subfolder] = true;
             var element = document.createElement('A');
-            element.setAttribute('href', '#/' + itemName + '/' + sensitiveMatch[1] + '/' + subfolder + '/');
+            element.setAttribute('href', '#/' + itemName + '/' + sensitiveMatch[1] + subfolder + '/');
             element.className = 'file folder';
             element.innerText = subfolder;
             fileContainer.appendChild(element);
