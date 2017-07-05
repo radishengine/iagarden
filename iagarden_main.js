@@ -17,8 +17,14 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     var itemName = hash[1];
     var fileContainer = document.getElementById('files');
     while (fileContainer.lastChild) fileContainer.removeChild(fileContainer.lastChild);
-    var sensitive = new RegExp('^(' + hash[2] + ')/(.+)$');
-    var insensitive = new RegExp('^(' + hash[2] + ')/(.+)$', 'i');
+    var sensitive, insensitive;
+    if (!hash[2]) {
+      sensitive = insensitive = /^(.*)$/;
+    }
+    else {
+      sensitive = new RegExp('^(' + hash[2] + ')/(.+)$');
+      insensitive = new RegExp('^(' + hash[2] + ')/(.+)$', 'i');
+    }
     var subfolders = Object.create(null);
     ia.fetchFileList(itemName).then(function(files) {
       var insensitiveMatch;
