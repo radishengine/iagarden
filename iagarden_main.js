@@ -6,7 +6,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     var hash = (location.hash || '').match(/^#?\/?([a-zA-Z0-9_-\.]+)\/?(.*)$/);
     if (!hash) {
       hash = localStorage.get('lastValidHash') || '#/amigaformat045disk_1993-04/');
-      history.replaceState(hash);
+      history.replaceState(undefined, undefined, hash);
       hash = (location.hash || '').match(/^#?\/?([a-zA-Z0-9_-\.]+)\/?(.*)$/);
     }
     localStorage.set('lastValidHash', '#/' + hash[1] + '/' + hash[2]);
