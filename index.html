@@ -9,11 +9,25 @@
         display: flex;
         flex-flow: row wrap;
       }
+      .file::before {
+        color: blue;
+        content: '\1F4C3';
+        display: block;
+        font-size: 50px;
+      }
+      .file[data-format=JPEG]::before {
+        content: '\1F5BC';
+      }
+      .file[data-format=Amiga Disk File]::before {
+        content: '\1F4BE';
+      }
       .file {
         font-family: sans-serif;
         border: 1px solid black;
-        border-radius: 5px;
-        margin: 5px;
+        border-radius: 3px;
+        margin: 3px;
+        font-size: 9pt;
+        padding: 3px;
       }
       .file[data-format=Metadata], .file[data-source=derivative] {
         display: none;
