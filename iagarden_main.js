@@ -64,4 +64,20 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
   window.addEventListener('hashchange', loadHash);
   loadHash();
   
+  document.getElementById('back').onclick = function(e) {
+    var hash = location.hash.match(/^(#.+\/)[^/]+\/?$/);
+    if (hash) {
+      location.hash = hash[1];
+      return;
+    }
+    var itemName = location.hash.match(/^#\/?([^\/]+)\/?$/);
+    if (itemName) {
+      ia.getItemRecord(itemName).then(function(item) {
+        var collection = item.collection;
+        if (Array.isArray(collection)) collection = collection[0];
+        location.hash = '#/' + collection + '/';
+      });
+    }
+  };
+  
 });
