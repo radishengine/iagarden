@@ -32,6 +32,28 @@ define(function() {
         });
       });
     },
+    tryFetchFileRecordsFromDB: function(itemName) {
+      return this.openDB().then(function(db) {
+        return new Promise(function(resolve, reject) {
+          var records = [];
+          var trn = db.transaction(['file']);
+          trn.oncomplete = function() {
+            resolve(records);
+          };
+          trn.onabort = function() {
+            reject();
+          };
+          trn.objectStore('file')
+          .openCursor(IDBKeyRange.bound([itemName, ''], [itemName, []]))
+          .onsuccess = function(e) {
+            var cursor = e.target.result;
+            if (!cursor) return;
+            records.push(cursor.value);
+            cursor.continue();
+          };
+        });
+      });
+    },
     putItemRecord: function(record) {
       return this.openDB().then(function(db) {
         return new Promise(function(resolve, reject) {
