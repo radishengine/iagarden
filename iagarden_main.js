@@ -62,10 +62,12 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       }
       else {
         document.body.classList.remove('loading');
+        document.body.style.cursor = 'default';
       }
     },
     function(reason) {
       document.body.classList.remove('loading');
+      document.body.style.cursor = 'default';
     });
   }
   window.addEventListener('hashchange', loadHash);
