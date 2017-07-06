@@ -72,7 +72,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     }
     var itemName = location.hash.match(/^#\/?([^\/]+)\/?$/);
     if (itemName) {
-      ia.getItemRecord(itemName).then(function(item) {
+      ia.getItemRecord(itemName[1]).then(function(item) {
         var collection = item.collection;
         if (Array.isArray(collection)) collection = collection[0];
         location.hash = '#/' + collection + '/';
