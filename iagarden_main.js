@@ -75,7 +75,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       ia.getItemRecord(itemName[1]).then(function(item) {
         var collection = item.collection;
         if (Array.isArray(collection)) collection = collection[0];
-        location.hash = '#/' + collection + '/';
+        if (collection) location.hash = '#/' + collection + '/';
       });
     }
   };
