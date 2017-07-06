@@ -72,8 +72,8 @@
       #loadlayer {
         visibility: hidden;
         opacity: 0;
-        transition: visibility 0s, opacity 0.2s ease;
-        transition-delay: 0.2s, 0s;
+        transition: visibility 0s, opacity 0.1s ease;
+        transition-delay: 0.1s, 0s;
         background: black;
         z-index: 1000;
         position: fixed;
@@ -87,7 +87,8 @@
       }
       body.loading #loadlayer {
         visibility: visible;
-        transition-delay: 0s, 0s;
+        transition-delay: 0s, 0.5s;
+        transition-duration: 0s, 0.1s;
         opacity: 0.8;
       }
     </style>
