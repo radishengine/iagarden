@@ -63,8 +63,8 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       else {
         document.body.classList.remove('loading');
       }
-    })
-    .else(function(reason) {
+    },
+    function(reason) {
       document.body.classList.remove('loading');
     });
   }
