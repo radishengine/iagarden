@@ -26,6 +26,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       insensitive = new RegExp('^(' + hash[2] + '/)(.+)$', 'i');
     }
     var subfolders = Object.create(null);
+    document.body.classList.add('loading');
     ia.getFileRecords(itemName).then(function(files) {
       var insensitiveMatch;
       files.forEach(function(fileInfo) {
@@ -59,6 +60,12 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
         history.replaceState(undefined, undefined, '#/' + itemName + '/' + insensitiveMatch[1]);
         loadHash();
       }
+      else {
+        document.body.classList.remove('loading');
+      }
+    })
+    .else(function(reason) {
+      document.body.classList.remove('loading');
     });
   }
   window.addEventListener('hashchange', loadHash);
