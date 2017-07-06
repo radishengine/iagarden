@@ -57,6 +57,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       });
       if (!fileContainer.firstElementChild && insensitiveMatch) {
         history.replaceState(undefined, undefined, '#/' + itemName + '/' + insensitiveMatch[1]);
+        loadHash();
       }
     });
   }
