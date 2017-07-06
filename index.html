@@ -54,9 +54,17 @@
       .file.folder::before {
         content: '\1F4C2';
       }
+      .back::before {
+        border-right: 10px solid; 
+        border-bottom: 10px solid;
+        height: 30px;
+        width: 30px;
+        transform: rotate(135deg) scale(0.7);
+      }
     </style>
   </head>
   <body>
+    <button class='back' id='back'>Back</button>
     <div class='files' id='files'></div>
   </body>
 </html>
