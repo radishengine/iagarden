@@ -15,6 +15,7 @@ define(function() {
           var itemStore = db.createObjectStore('item', {keyPath:'identifier'});
           itemStore.createIndex('collection', 'collection', {multiEntry:true});
           itemStore.createIndex('subject', 'subject', {multiEntry:true});
+          itemStore.createIndex('mediatype', 'mediatype');
           var fileStore = db.createObjectStore('file', {keyPath:['item', 'name']});
         };
         opening.onsuccess = function(e) {
