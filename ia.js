@@ -107,7 +107,17 @@ define(function() {
         }
         var meta = Object.create(null);
         for (var el = xml.documentElement.firstElementChild; el; el = el.nextElementSibling) {
-          meta[el.nodeName] = el.textContent;
+          if (el.nodeName in meta) {
+            if (typeof meta[el.nodeName].push === 'function') {
+              meta[el.nodeName].push(el.textContent);
+            }
+            else {
+              meta[el.nodeName] = [meta[el.nodeName], el.textContent];
+            }
+          }
+          else {
+            meta[el.nodeName] = el.textContent;
+          }
         }
         return meta;
       });
