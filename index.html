@@ -87,6 +87,7 @@
       body.loading #loadlayer {
         visibility: visible;
         opacity: 0.8;
+        transition: visibility 0s, opacity 0.2s ease;
       }
     </style>
   </head>
@@ -104,7 +105,7 @@
         }
 
         .spinner > div {
-          background-color: #333;
+          background-color: #fff;
           height: 100%;
           width: 6px;
           display: inline-block;
