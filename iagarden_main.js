@@ -13,7 +13,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       history.replaceState(undefined, undefined, hash);
       hash = hash.match(/^#?\/?([a-zA-Z0-9_\-\.]+)\/?(.*?)\/?$/);
     }
-    localStorage.setItem('lastValidHash', '#/' + hash[1] + '/' + hash[2]);
+    localStorage.setItem('lastValidHash', '#/' + hash[1] + '/' + hash[2] + '/');
     var itemName = hash[1];
     var fileContainer = document.getElementById('files');
     while (fileContainer.lastChild) fileContainer.removeChild(fileContainer.lastChild);
