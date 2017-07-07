@@ -10,6 +10,15 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     history.replaceState(undefined, undefined, './' + location.hash);
   }
   
+  function loadWhile(promise) {
+    document.body.classList.add('loading');
+    return Promise.resolve(promise)
+    .then(function(result) {
+      document.body.classList.remove('loading');
+      return result;
+    });
+  }
+  
   function loadHash() {
     var parts = location.hash.replace(/^#/, '').split('?', 2);
     var pathParts = parts[0].split('/').filter(function(v) { return !!v; });
@@ -29,7 +38,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       return;
     }
     
-    ia.getItemRecord(pathParts[0]).then(function(itemRecord) {
+    loadWhile(ia.getItemRecord(pathParts[0]).then(function(itemRecord) {
       if (itemRecord === null) {
         return ia.normalizeItemName(pathParts[0])
         .then(function(normalized) {
@@ -42,8 +51,9 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
           loadHash();
         });
       }
+      document.getElementById('title').innerText = itemRecord.title || itemRecord.identifier;
       console.log(itemRecord);
-    });
+    }));
     
     return;
     
