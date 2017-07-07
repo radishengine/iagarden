@@ -86,23 +86,31 @@ define(function() {
     },
     fetchBlob: function(item, filename) {
       return fetch(this.getFetchURL(item, filename))
-      .then(function(request) {
-        return request.blob();
+      .then(function(r) {
+        if (r.ok) {
+          return r.blob();
+        }
+        if (r.status === 404) return null;
+        return Promise.reject('server returned ' + r.status + ' ' + r.statusText);
       });
     },
     fetchXml: function(item, filename) {
       return fetch(this.getFetchURL(item, filename))
-      .then(function(request) {
-        return request.text();
+      .then(function(r) {
+        if (r.ok) {
+          return r.text().then(function(text) {
+            var parser = new DOMParser();
+            return parser.parseFromString(text, 'application/xml');
+          });
+        }
+        if (r.status === 404) return null;
+        return Promise.reject('server returned ' + r.status + ' ' + r.statusText);
       })
-      .then(function(text) {
-        var parser = new DOMParser();
-        return parser.parseFromString(text, 'application/xml');
-      });
     },
     downloadItemRecord: function(itemName) {
       return this.fetchXml(itemName, itemName + '_meta.xml')
       .then(function(xml) {
+        if (xml === null) return null;
         if (xml.documentElement.nodeName !== 'metadata') {
           return Promise.reject('bad xml');
         }
@@ -130,7 +138,7 @@ define(function() {
         if (record !== null) return record;
         return self.downloadItemRecord(itemName)
         .then(function(record) {
-          self.putItemRecord(record);
+          if (record !== null) self.putItemRecord(record);
           return record;
         });
       });
@@ -142,6 +150,7 @@ define(function() {
         if (records.length > 0) return records;
         return self.downloadFileRecords(itemName)
         .then(function(records) {
+          if (records === null) return [];
           self.putFileRecords(records);
           return records;
         });
@@ -150,6 +159,7 @@ define(function() {
     downloadFileRecords: function(item) {
       return this.fetchXml(item, item + '_files.xml')
       .then(function(xml) {
+        if (xml === null) return null;
         if (xml.documentElement.nodeName !== 'files') {
           return Promise.reject('bad xml');
         }
