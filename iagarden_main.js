@@ -22,6 +22,31 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     }
     console.log(pathParts, params);
     
+    if (pathParts.length === 0 || !/^[a-zA-Z0-9_\.\-]+$/.test(pathParts[0])) {
+      hash = localStorage.getItem('lastValidHash') || '#/amigaformat045disk_1993-04/';
+      history.replaceState(undefined, undefined, hash);
+      loadHash();
+      return;
+    }
+    
+    ia.getItemRecord(pathParts[0]).then(function(itemRecord) {
+      if (itemRecord === null) {
+        return ia.normalizeItemName(pathParts[0])
+        .then(function(normalized) {
+          if (normalized === null) {
+            // TODO: 404 page
+            return;
+          }
+          pathParts[0] = normalized;
+          history.replaceState(undefined, undefined, '#/' + pathParts.map(function(v) { return v + '/'; }));
+          loadHash();
+        });
+      }
+      console.log(itemRecord);
+    });
+    
+    return;
+    
     var hash = (location.hash || '').match(/^#?\/?([a-zA-Z0-9_\-\.]+)\/?(.*?)\/?$/);
     if (!hash) {
       hash = localStorage.getItem('lastValidHash') || '#/amigaformat045disk_1993-04/';
