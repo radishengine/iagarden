@@ -2,6 +2,30 @@ define(function() {
 
   'use strict';
   
+  function search(terms, fields) {
+    var cbNum = 0;
+    do { cbNum++; } while (('cb' + cbNum) in window);
+    var url = '//archive.org/advancedsearch.php?q=' + encodeURIComponent(terms)
+      + '&callback=cb' + cbNum
+      + '&fl[]=' + (fields || ['identifier']).join(',')
+      + '&rows=50'
+      + '&page=1'
+      + '&output=json';
+    return new Promise(function(resolve, reject) {
+      var script = document.createElement('SCRIPT');
+      script.setAttribute('src', url);
+      window['cb' + cbNum] = function(result) {
+        delete window['cb' + cbNum];
+        script.parentNode.removeChild(script);
+        var docs = result.response.docs;
+        docs.numFound = result.response.numFound;
+        docs.start = result.response.start;
+        resolve(docs);
+      };
+      document.head.appendChild(script);
+    });
+  }
+  
   return {
     openDB: function() {
       var self = this;
@@ -129,6 +153,13 @@ define(function() {
           }
         }
         return meta;
+      });
+    },
+    normalizeItemName: function(itemName) {
+      return search('identifier:' + itemName)
+      .then(function(results) {
+        if (results.length === 0) return null;
+        return results[0].identifier;
       });
     },
     getItemRecord: function(itemName) {
