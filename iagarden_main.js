@@ -6,6 +6,10 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
   }
   
+  if (/\/index\.html$/i.test(location.pathname)) {
+    history.replaceState(undefined, undefined, './' + location.hash);
+  }
+  
   function loadHash() {
     var hash = (location.hash || '').match(/^#?\/?([a-zA-Z0-9_\-\.]+)\/?(.*?)\/?$/);
     if (!hash) {
