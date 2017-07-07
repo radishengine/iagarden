@@ -11,6 +11,17 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
   }
   
   function loadHash() {
+    var parts = location.hash.replace(/^#/, '').split('?', 2);
+    var pathParts = parts[0].split('/').filter(function(v) { return !!v; });
+    var params = Object.create(null);
+    if (parts[1]) {
+      parts[1].split('&').forEach(function(param) {
+        var pair = param.split('=', 2);
+        params[pair[0]] = pair.length === 1 ? true : pair[1];
+      });
+    }
+    console.log(pathParts, params);
+    
     var hash = (location.hash || '').match(/^#?\/?([a-zA-Z0-9_\-\.]+)\/?(.*?)\/?$/);
     if (!hash) {
       hash = localStorage.getItem('lastValidHash') || '#/amigaformat045disk_1993-04/';
