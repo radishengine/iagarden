@@ -83,7 +83,9 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     }
     var itemName = location.hash.match(/^#\/?([^\/]+)\/?$/);
     if (itemName) {
+      document.body.classList.add('loading');
       ia.getItemRecord(itemName[1]).then(function(item) {
+        document.body.classList.remove('loading');
         var collection = item.collection;
         if (Array.isArray(collection)) collection = collection[0];
         if (collection) location.hash = '#/' + collection + '/';
