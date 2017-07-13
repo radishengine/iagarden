@@ -99,122 +99,133 @@
       .controls {
         display: none;
       }
+      body:not(.notfound) > #notfound {
+        display: none;
+      }
+      body.notfound > #content {
+        display: none;
+      }
     </style>
   </head>
   <body>
-    <button class='back' id='back'>Back</button>
-    <h1 id='title'></h1>
-    <select>
-      <option>utf-8</option>
-      <option>utf-16be</option>
-      <option>utf-16le</option>
-      <option>ibm866</option>
-      <option>iso-8859-2</option>
-      <option>iso-8859-3</option>
-      <option>iso-8859-4</option>
-      <option>iso-8859-5</option>
-      <option>iso-8859-6</option>
-      <option>iso-8859-7</option>
-      <option>iso-8859-8</option>
-      <option>iso-8859-8i</option>
-      <option>iso-8859-10</option>
-      <option>iso-8859-13</option>
-      <option>iso-8859-14</option>
-      <option>iso-8859-15</option>
-      <option>iso-8859-16</option>
-      <option>koi8-r</option>
-      <option>koi8-u</option>
-      <option>macintosh</option>
-      <option>windows-874</option>
-      <option>windows-1250</option>
-      <option>windows-1251</option>
-      <option>windows-1252</option>
-      <option>windows-1253</option>
-      <option>windows-1254</option>
-      <option>windows-1255</option>
-      <option>windows-1256</option>
-      <option>windows-1257</option>
-      <option>windows-1258</option>
-      <option>x-mac-cyrillic</option>
-      <option>gbk</option>
-      <option>gb18030</option>
-      <option>hz-gb-2312</option>
-      <option>big5</option>
-      <option>euc-jp</option>
-      <option>iso-2022-jp</option>
-      <option>shift-jis</option>
-      <option>euc-kr</option>
-      <option>iso-2022-kr</option>
-    </select>
-    <div class='text controls'>
-      <label><input type='checkbox' id='ansi'> ANSI escapes</label>
-      <button id='download'>Download</button>
-      <button id='download-utf-8'>Download (UTF-8)</button>
-      <button id='download-original'>Download (Original)</button>
-      <button id='download-zip'>Download .ZIP</button>
+    <div id='notfound'>
+      <h1>404 Page Not Found</h1>
     </div>
-    <div class='files' id='files'></div>
-    <div id='loadlayer'>
-      <style>
-        .spinner {
-          margin: 100px auto;
-          width: 50px;
-          height: 40px;
-          text-align: center;
-          font-size: 10px;
-        }
-
-        .spinner > div {
-          background-color: #fff;
-          height: 100%;
-          width: 6px;
-          display: inline-block;
-
-          -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
-          animation: sk-stretchdelay 1.2s infinite ease-in-out;
-        }
-
-        .spinner .rect2 {
-          -webkit-animation-delay: -1.1s;
-          animation-delay: -1.1s;
-        }
-
-        .spinner .rect3 {
-          -webkit-animation-delay: -1.0s;
-          animation-delay: -1.0s;
-        }
-
-        .spinner .rect4 {
-          -webkit-animation-delay: -0.9s;
-          animation-delay: -0.9s;
-        }
-
-        .spinner .rect5 {
-          -webkit-animation-delay: -0.8s;
-          animation-delay: -0.8s;
-        }
-
-        @-webkit-keyframes sk-stretchdelay {
-          0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
-          20% { -webkit-transform: scaleY(1.0) }
-        }
-
-        @keyframes sk-stretchdelay {
-          0%, 40%, 100% { 
-            transform: scaleY(0.4);
-            -webkit-transform: scaleY(0.4);
-          }  20% { 
-            transform: scaleY(1.0);
-            -webkit-transform: scaleY(1.0);
+    <div id='content'>
+      <button class='back' id='back'>Back</button>
+      <h1 id='title'></h1>
+      <select>
+        <option>utf-8</option>
+        <option>utf-16be</option>
+        <option>utf-16le</option>
+        <option>ibm866</option>
+        <option>iso-8859-2</option>
+        <option>iso-8859-3</option>
+        <option>iso-8859-4</option>
+        <option>iso-8859-5</option>
+        <option>iso-8859-6</option>
+        <option>iso-8859-7</option>
+        <option>iso-8859-8</option>
+        <option>iso-8859-8i</option>
+        <option>iso-8859-10</option>
+        <option>iso-8859-13</option>
+        <option>iso-8859-14</option>
+        <option>iso-8859-15</option>
+        <option>iso-8859-16</option>
+        <option>koi8-r</option>
+        <option>koi8-u</option>
+        <option>macintosh</option>
+        <option>windows-874</option>
+        <option>windows-1250</option>
+        <option>windows-1251</option>
+        <option>windows-1252</option>
+        <option>windows-1253</option>
+        <option>windows-1254</option>
+        <option>windows-1255</option>
+        <option>windows-1256</option>
+        <option>windows-1257</option>
+        <option>windows-1258</option>
+        <option>x-mac-cyrillic</option>
+        <option>gbk</option>
+        <option>gb18030</option>
+        <option>hz-gb-2312</option>
+        <option>big5</option>
+        <option>euc-jp</option>
+        <option>iso-2022-jp</option>
+        <option>shift-jis</option>
+        <option>euc-kr</option>
+        <option>iso-2022-kr</option>
+      </select>
+      <div class='text controls'>
+        <label><input type='checkbox' id='ansi'> ANSI escapes</label>
+        <button id='download'>Download</button>
+        <button id='download-utf-8'>Download (UTF-8)</button>
+        <button id='download-original'>Download (Original)</button>
+        <button id='download-zip'>Download .ZIP</button>
+      </div>
+      <div class='files' id='files'></div>
+      <div id='loadlayer'>
+        <style>
+          .spinner {
+            margin: 100px auto;
+            width: 50px;
+            height: 40px;
+            text-align: center;
+            font-size: 10px;
           }
-        }
-      </style>
-      <div class="spinner">
-        <div class="rect1"></div>
-        <div class="rect2"></div>
-        <div class="rect3"></div>
-        <div class="rect4"></div>
-        <div class="rect5"></div>
+
+          .spinner > div {
+            background-color: #fff;
+            height: 100%;
+            width: 6px;
+            display: inline-block;
+
+            -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+            animation: sk-stretchdelay 1.2s infinite ease-in-out;
+          }
+
+          .spinner .rect2 {
+            -webkit-animation-delay: -1.1s;
+            animation-delay: -1.1s;
+          }
+
+          .spinner .rect3 {
+            -webkit-animation-delay: -1.0s;
+            animation-delay: -1.0s;
+          }
+
+          .spinner .rect4 {
+            -webkit-animation-delay: -0.9s;
+            animation-delay: -0.9s;
+          }
+
+          .spinner .rect5 {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+          }
+
+          @-webkit-keyframes sk-stretchdelay {
+            0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+            20% { -webkit-transform: scaleY(1.0) }
+          }
+
+          @keyframes sk-stretchdelay {
+            0%, 40%, 100% { 
+              transform: scaleY(0.4);
+              -webkit-transform: scaleY(0.4);
+            }  20% { 
+              transform: scaleY(1.0);
+              -webkit-transform: scaleY(1.0);
+            }
+          }
+        </style>
+        <div class="spinner">
+          <div class="rect1"></div>
+          <div class="rect2"></div>
+          <div class="rect3"></div>
+          <div class="rect4"></div>
+          <div class="rect5"></div>
+        </div>
       </div>
     </div>
   </body>
