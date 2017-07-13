@@ -96,6 +96,9 @@
         transition-duration: 0s, 0.5s;
         opacity: 0.8;
       }
+      .controls {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -143,11 +146,13 @@
       <option>euc-kr</option>
       <option>iso-2022-kr</option>
     </select>
-    <label><input type='checkbox' id='ansi'> ANSI escapes</label>
-    <button id='download'>Download</button>
-    <button id='download-utf-8'>Download (UTF-8)</button>
-    <button id='download-original'>Download (Original)</button>
-    <button id='download-zip'>Download .ZIP</button>    
+    <div class='text controls'>
+      <label><input type='checkbox' id='ansi'> ANSI escapes</label>
+      <button id='download'>Download</button>
+      <button id='download-utf-8'>Download (UTF-8)</button>
+      <button id='download-original'>Download (Original)</button>
+      <button id='download-zip'>Download .ZIP</button>
+    </div>
     <div class='files' id='files'></div>
     <div id='loadlayer'>
       <style>
