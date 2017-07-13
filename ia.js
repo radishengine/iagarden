@@ -116,6 +116,9 @@ define(function() {
         }
         if (r.status === 404) return null;
         return Promise.reject('server returned ' + r.status + ' ' + r.statusText);
+      },
+      function() {
+        return null;
       });
     },
     fetchXml: function(item, filename) {
@@ -129,7 +132,10 @@ define(function() {
         }
         if (r.status === 404) return null;
         return Promise.reject('server returned ' + r.status + ' ' + r.statusText);
-      })
+      },
+      function() {
+        return null;
+      });
     },
     downloadItemRecord: function(itemName) {
       return this.fetchXml(itemName, itemName + '_meta.xml')
