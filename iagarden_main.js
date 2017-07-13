@@ -23,6 +23,27 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     });
   }
   
+  function strOrArrayContains(sOrA, needle) {
+    if (sOrA === needle) return true;
+    if (!Array.isArray(needle)) return false;
+    return sOrA.indexOf(needle) !== -1;
+  }
+  
+  function initCollection(itemRecord) {
+    var fileContainer = document.getElementById('files');
+    fileContainer.innerHTML = '';
+    return ia.getCollectionItems(itemRecord.identifier)
+    .then(function(results) {
+      for (var i = 0; i < results.length; i++) {
+        var element = document.createElement('A');
+        element.setAttribute('href', '#/' + record.identifier + '/');
+        element.className = 'file folder';
+        element.innerText = record.identifier;
+        fileContainer.appendChild(element);
+      }
+    });
+  }
+  
   function loadHash() {
     var parts = location.hash.replace(/^#/, '').split('?', 2);
     var pathParts = parts[0].split('/').filter(function(v) { return !!v; });
@@ -58,6 +79,9 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       document.getElementById('title').innerText = itemRecord.title || itemRecord.identifier;
       console.log(itemRecord);
       document.body.classList.remove('notfound');
+      if (itemRecord.mediatype === 'collection') {
+        return initCollection(itemRecord);
+      }
     }));
     
     return;
