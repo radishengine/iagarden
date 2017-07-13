@@ -168,6 +168,9 @@ define(function() {
         return results[0].identifier;
       });
     },
+    getCollectionItems: function(itemName) {
+      return search('collection:' + itemName);
+    },
     getItemRecord: function(itemName) {
       var self = this;
       return this.tryFetchItemRecordFromDB(itemName)
