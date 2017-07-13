@@ -52,7 +52,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       var insensitiveMatch;
       files.forEach(function(fileInfo) {
         var element = document.createElement('A');
-        element.setAttribute('href', '#/' + itemRecord.identifer + '/' + fileInfo.name);
+        element.setAttribute('href', '#/' + itemRecord.identifier + '/' + fileInfo.name);
         element.className = 'file';
         Object.assign(element.dataset, fileInfo);
         element.innerText = fileInfo.name;
