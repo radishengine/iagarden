@@ -44,6 +44,23 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     });
   }
   
+  function initItem(itemRecord) {
+    var fileContainer = document.getElementById('files');
+    fileContainer.innerHTML = '';
+    return ia.getFileRecords(itemRecord.identifier)
+    .then(function(files) {
+      var insensitiveMatch;
+      files.forEach(function(fileInfo) {
+        var element = document.createElement('A');
+        element.setAttribute('href', '#/' + itemRecord.identifer + '/' + fileInfo.name);
+        element.className = 'file';
+        Object.assign(element.dataset, fileInfo);
+        element.innerText = fileInfo.name;
+        fileContainer.appendChild(element);
+      });
+    });
+  }
+  
   function loadHash() {
     var parts = location.hash.replace(/^#/, '').split('?', 2);
     var pathParts = parts[0].split('/').filter(function(v) { return !!v; });
@@ -81,6 +98,9 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       document.body.classList.remove('notfound');
       if (itemRecord.mediatype === 'collection') {
         return initCollection(itemRecord);
+      }
+      else {
+        return initItem(itemRecord);
       }
     }));
     
