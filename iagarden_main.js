@@ -16,6 +16,10 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     .then(function(result) {
       document.body.classList.remove('loading');
       return result;
+    },
+    function(r) {
+      document.body.classList.remove('loading');
+      return Promise.reject(r);
     });
   }
   
