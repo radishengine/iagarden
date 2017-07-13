@@ -36,9 +36,9 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
     .then(function(results) {
       for (var i = 0; i < results.length; i++) {
         var element = document.createElement('A');
-        element.setAttribute('href', '#/' + record.identifier + '/');
+        element.setAttribute('href', '#/' + results[i].identifier + '/');
         element.className = 'file folder';
-        element.innerText = record.identifier;
+        element.innerText = results[i].identifier;
         fileContainer.appendChild(element);
       }
     });
