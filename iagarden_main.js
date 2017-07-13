@@ -47,7 +47,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
         return ia.normalizeItemName(pathParts[0])
         .then(function(normalized) {
           if (normalized === null) {
-            // TODO: 404 page
+            document.body.classList.add('notfound');
             return;
           }
           pathParts[0] = normalized;
@@ -57,6 +57,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       }
       document.getElementById('title').innerText = itemRecord.title || itemRecord.identifier;
       console.log(itemRecord);
+      document.body.classList.remove('notfound');
     }));
     
     return;
