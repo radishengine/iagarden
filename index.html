@@ -35,32 +35,320 @@
         display: none;
       }
       .file::before {
-        content: '\1F4C3';
+        content: '\1F4C4';
         display: block;
         font-size: 50px;
         font-weight: normal;
       }
-      .file[data-format=Text]::before {
-        content: '\1F4C3';
+      .file[data-format=TrueType\ Font]::before {
+        content: '\2712';
+      }
+      .file[data-format=Text]::before,
+      .file[data-format=Text\ PDF]::before {
+        content: '\1F4C4';
+      }
+      .file[data-format=Rich\ Text\ Format]::before,
+      .file[data-format=Word\ Document]::before,
+      .file[data-format=OpenDocument\ Text\ Document]::before {
+        content: '\1F4DC';
       }
       .file[data-format=JPEG]::before,
+      .file[data-format=Motion\ JPEG]::before,
+      .file[data-format=Movie\ Frames]::before,
+      .file[data-format=JPEG\ Thumb]::before,
+      .file[data-format=JPEG\ Thumb\ Large]::before,
+      .file[data-format=JPEG\ 250px\ Thumb]::before,
+      .file[data-format=JPEG\ 500px\ Thumb]::before,
+      .file[data-format=JPEG\ 2000]::before,
       .file[data-format=PNG]::before,
       .file[data-format=Collection\ Header]::before,
       .file[data-format=Item\ Image]::before,
-      .file[data-format=Animated\ GIF]::before {
+      .file[data-format=Animated\ GIF]::before,
+      .file[data-format=Adobe\ Illustrator]::before,
+      .file[data-format=Bitmap\ Image]::before,
+      .file[data-format=Book\ Cover]::before,
+      .file[data-format=Book\ Cover\ Image]::before,
+      .file[data-format=Emulator\ Screenshot]::before,
+      .file[data-format=MPEGTS/Thumbnail]::before,
+      .file[data-format=Thumbnail]::before,
+      .file[data-format=TIFF]::before {
         content: '\1F3A8';
       }
-      .file[data-format=ZIP]::before, .file[data-format=RAR]::before {
+      .file[data-format=ZIP]::before,
+      .file[data-format=TAR]::before,
+      .file[data-format=GZIP]::before,
+      .file[data-format=GZipped\ TAR]::before,
+      .file[data-format=TGZiped\ Text\ Files]::before,
+      .file[data-format=BZIP2]::before,
+      .file[data-format=RAR]::before,
+      .file[data-format=7z]::before,
+      .file[data-format=Backup]::before,
+      .file[data-format=Encrypted\ Internet\ Archive\ ARC\ GZ]::before,
+      .file[data-format=Encrypted\ Web\ ARChive\ GZ]::before,
+      .file[data-format=Internet\ Archive\ ARC]::before,
+      .file[data-format=Internet\ Archive\ ARC\ GZ]::before,
+      .file[data-format=MBOX\ GZ]::before,
+      .file[data-format=PersonalArchive]::before,
+      .file[data-format=Web\ ARChive]::before,
+      .file[data-format=Web\ ARChive\ GZ]::before {
         content: '\1F4E6';
       }
-      .file[data-format=Amiga\ Disk\ File]::before {
+      .file[data-format=Amiga\ Disk\ File]::before,
+      .file[data-format=Mac\ OS\ X\ Disk\ Image]::before {
         content: '\1F4BE';
       }
       .file[data-format=ISO\ Image]::before {
         content: '\1F4BF';
       }
+      .file[data-format=3GP]::before,
+      .file[data-format=QuickTime]::before,
+      .file[data-format=56Kb\ QuickTime]::before,
+      .file[data-format=64Kb\ QuickTime]::before,
+      .file[data-format=256Kb\ QuickTime]::before,
+      .file[data-format=MPEG1]::before,
+      .file[data-format=MPEG2]::before,
+      .file[data-format=MPEG2-TS]::before,
+      .file[data-format=MPEG4]::before,
+      .file[data-format=MPEGTS/h.264]::before,
+      .file[data-format=64Kb\ MPEG4]::before,
+      .file[data-format=256Kb\ MPEG4]::before,
+      .file[data-format=512Kb\ MPEG4]::before,
+      .file[data-format=Cinepack]::before,
+      .file[data-format=DivX]::before,
+      .file[data-format=Matroska]::before,
+      .file[data-format=IV50]::before,
+      .file[data-format=DV\ Video]::before,
+      .file[data-format=Flash\ Video]::before,
+      .file[data-format=h.264]::before,
+      .file[data-format=h.264\ 486P]::before,
+      .file[data-format=h.264\ 720P]::before,
+      .file[data-format=h.264\ HD]::before,
+      .file[data-format=h.264\ MPEG4]::before,
+      .file[data-format=h.264\ popcorn]::before,
+      .file[data-format=h.264\ MPEG2-TS]::before,
+      .file[data-format=HiRes\ MPEG4]::before,
+      .file[data-format=Ogg\ Theora]::before,
+      .file[data-format=Ogg\ Video]::before,
+      .file[data-format=Real\ Media]::before,
+      .file[data-format=VOB]::before,
+      .file[data-format=WebM]::before,
+      .file[data-format=Windows\ Media]::before {
+        content: '\1F3AC';
+      }
+      .file[data-format=WAVE]::before,
+      .file[data-format=3GP\ Audio]::before,
+      .file[data-format=24bit\ Flac]::before,
+      .file[data-format=Flac]::before,
+      .file[data-format=M3U]::before,
+      .file[data-format=VBR\ M3U]::before,
+      .file[data-format=64kbps\ M3U]::before,
+      .file[data-format=128kbps\ M3U]::before,
+      .file[data-format=MP3]::before,
+      .file[data-format=VBR\ MP3]::before,
+      .file[data-format=MP3\ Sample]::before,
+      .file[data-format=64Kbps\ MP3]::before,
+      .file[data-format=96Kbps\ MP3]::before,
+      .file[data-format=128Kbps\ MP3]::before,
+      .file[data-format=160Kbps\ MP3]::before,
+      .file[data-format=192Kbps\ MP3]::before,
+      .file[data-format=256Kbps\ MP3]::before,
+      .file[data-format=320Kbps\ MP3]::before,
+      .file[data-format=Apple\ Audiobook]::before,
+      .file[data-format=LibriVox\ Apple\ Audiobook]::before,
+      .file[data-format=Apple\ Lossless\ Audio]::before,
+      .file[data-format=Advanced\ Audio\ Coding]::before,
+      .file[data-format=AIFF]::before,
+      .file[data-format=Digital\ Theater\ Systems\ Audio]::before,
+      .file[data-format=MIDI]::before,
+      .file[data-format=NRT]::before,
+      .file[data-format=NRT\ Processed]::before,
+      .file[data-format=Ogg\ Vorbis]::before,
+      .file[data-format=Real\ Audio]::before,
+      .file[data-format=Shorten]::before,
+      .file[data-format=Sibelius]::before,
+      .file[data-format=WebA]::before,
+      .file[data-format=Windows\ Media\ Audio]::before {
+        content: '\1F50A';
+      }
+      .file[data-format=Abbyy\ GZ]::before,
+      .file[data-format=Abbyy\ HTML]::before,
+      .file[data-format=Corrected\ Abbyy\ HTML]::before,
+      .file[data-format=ABBYY\ XML]::before,
+      .file[data-format=Abbyy\ ZIP]::before,
+      .file[data-format=Comic\ Book\ RAR]::before,
+      .file[data-format=Comic\ Book\ ZIP]::before,
+      .file[data-format=DjVu]::before,
+      .file[data-format=Original\ DjVu]::before,
+      .file[data-format=DjVuTXT]::before,
+      .file[data-format=Djvu\ XML]::before,
+      .file[data-format=EPUB]::before,
+      .file[data-format=Generic\ Raw\ Book\ Tar]::before,
+      .file[data-format=Generic\ Raw\ Book\ Zip]::before,
+      .file[data-format=Image\ Container\ PDF]::before,
+      .file[data-format=JPEG-Compressed\ PDF]::before,
+      .file[data-format=Microfilm\ Original\ TIFF\ ZIP]::before,
+      .file[data-format=Microsoft\ Reader]::before,
+      .file[data-format=MOBI]::before,
+      .file[data-format=Single\ Book\ Page\ Text]::before,
+      .file[data-format=Single\ Page\ B/W\ JPG\ ZIP]::before,
+      .file[data-format=Single\ Page\ FIXME\ JPEG\ Tar]::before,
+      .file[data-format=Single\ Page\ FIXME\ JPEG\ ZIP]::before,
+      .file[data-format=Single\ Page\ Library\ JP2\ Tar]::before,
+      .file[data-format=Single\ Page\ Library\ JP2\ ZIP]::before,
+      .file[data-format=Single\ Page\ Library\ TIFF\ ZIP]::before,
+      .file[data-format=Single\ Page\ Original\ CR2\ Tar]::before,
+      .file[data-format=Single\ Page\ Original\ JP2\ Tar]::before,
+      .file[data-format=Single\ Page\ Original\ JP2\ ZIP]::before,
+      .file[data-format=Single\ Page\ Original\ JPEG\ Tar]::before,
+      .file[data-format=Single\ Page\ Original\ JPEG\ ZIP]::before,
+      .file[data-format=Single\ Page\ Original\ TIFF\ ZIP]::before,
+      .file[data-format=Single\ Page\ Processed\ JP2\ Tar]::before,
+      .file[data-format=Single\ Page\ Processed\ JP2\ ZIP]::before,
+      .file[data-format=Single\ Page\ Processed\ JPEG\ Tar]::before,
+      .file[data-format=Single\ Page\ Processed\ JPEG\ ZIP]::before,
+      .file[data-format=Single\ Page\ Processed\ TIFF\ ZIP]::before,
+      .file[data-format=Single\ Page\ Pure\ JP2\ Tar]::before,
+      .file[data-format=Single\ Page\ Pure\ JP2\ ZIP]::before,
+      .file[data-format=Single\ Page\ Raw\ JP2\ Tar]::before,
+      .file[data-format=Single\ Page\ Raw\ JP2\ ZIP]::before,
+      .file[data-format=Single\ Page\ Raw\ JPEG\ Tar]::before,
+      .file[data-format=Single\ Page\ Raw\ JPEG\ ZIP]::before,
+      .file[data-format=Single\ Page\ Watermark\ JP2\ Tar]::before,
+      .file[data-format=Single\ Page\ Watermark\ JP2\ ZIP]::before,
+      .file[data-format=Single\ Page\ Zipped\ PDF]::before,
+      .file[data-format=PalmOS\ Plucker]::before,
+      .file[data-format=Sony\ Reader\ Format]::before,
+      .file[data-format=Raw\ China\ Books\ RAR\ Tar]::before,
+      .file[data-format=Raw\ China\ Books\ RAR\ Zip]::before,
+      .file[data-format=Raw\ China\ Book\ Zip]::before,
+      .file[data-format=Raw\ Cornell\ Book\ Zip]::before,
+      .file[data-format=Raw\ Mekel\ Tar]::before,
+      .file[data-format=Raw\ Michigan\ Book\ Zip]::before,
+      .file[data-format=Raw\ NIH\ Book\ Zip]::before,
+      .file[data-format=Raw\ TBRC\ Book\ Zip]::before,
+      .file[data-format=Raw\ Yale\ Book\ Zip]::before,
+      .file[data-format=Raw\ Yale\ Medical\ Book\ Zip]::before,
+      .file[data-format=RePublisher\ Full\ Tar]::before,
+      .file[data-format=RePublisher\ Proxy\ Tar]::before,
+      .file[data-format=TTScribe\ Preimage\ ZIP]::before {
+        content: '\1F4D5';
+      }      
+      .file[data-format=Additional\ Text\ PDF]::before,
+      .file[data-format=Grayscale\ LuraTech\ PDF]::before,
+      .file[data-format=ARC\ CDX\ Index]::before,
+      .file[data-format=WARC\ CDX\ Index]::before,
+      .file[data-format=Item\ CDX\ Index]::before,
+      .file[data-format=Item\ CDX\ Meta-Index]::before,
+      .file[data-format=WARC\ HostLinks\ GZ]::before,
+      .file[data-format=ARC\ Named\ Entities\ GZ]::before,
+      .file[data-format=WARC\ Named\ Entities\ GZ]::before,
+      .file[data-format=ARC\ Transformation\ GZ]::before,
+      .file[data-format=WARC\ Transformation\ GZ]::before,
+      .file[data-format=WARC\ UrlLinks\ Log]::before,
+      .file[data-format=Audio\ Transclusion\ Contents]::before,
+      .file[data-format=Movies\ Transclusion\ Contents]::before,
+      .file[data-format=Texts\ Transclusion\ Contents]::before,
+      .file[data-format=METS]::before,
+      .file[data-format=Biodiversity\ Heritage\ Library\ METS]::before,
+      .file[data-format=BitTorrentContents]::before,
+      .file[data-format=Cascading\ Style\ Sheet]::before,
+      .file[data-format=HTML]::before,
+      .file[data-format=Catalog\ History\ CSV]::before,
+      .file[data-format=CD\ Audio\ Track\ Shortcut]::before,
+      .file[data-format=CD\ Datafiles\ Zip]::before,
+      .file[data-format=Checksums]::before,
+      .file[data-format=Closed\ Caption\ Text]::before,
+      .file[data-format=Columbia\ Fingerprint]::before,
+      .file[data-format=Columbia\ Fingerprint\ TV]::before,
+      .file[data-format=Columbia\ Peaks]::before,
+      .file[data-format=Columbia\ Sparse\ Fingerprint\ TV]::before,
+      .file[data-format=Comma-Separated\ Values]::before,
+      .file[data-format=Comma-Separated\ Values\ GZ]::before,
+      .file[data-format=JSON]::before,
+      .file[data-format=JSON\ GZ]::before,
+      .file[data-format=Contents]::before,
+      .file[data-format=Crowley\ IDF]::before,
+      .file[data-format=Crowley\ QPF]::before,
+      .file[data-format=Cue\ Sheet]::before,
+      .file[data-format=CUIL]::before,
+      .file[data-format=DAT]::before,
+      .file[data-format=Encrypted\ DAT]::before,
+      .file[data-format=Derivation\ Rules]::before,
+      .file[data-format=Development\ Scandata]::before,
+      .file[data-format=Dublin\ Core]::before,
+      .file[data-format=DVD\ Info]::before,
+      .file[data-format=DVD\ Info\ Backup]::before,
+      .file[data-format=Essentia\ High\ GZ]::before,
+      .file[data-format=Essentia\ Low\ GZ]::before,
+      .file[data-format=Extended\ Data\ Services]::before,
+      .file[data-format=Extra\ Metadata\ JSON]::before,
+      .file[data-format=Flac\ FingerPrint]::before,
+      .file[data-format=Flippy\ ZIP]::before,
+      .file[data-format=HeritrixCrawlLog]::before,
+      .file[data-format=HeritrixJob]::before,
+      .file[data-format=Information]::before,
+      .file[data-format=Log]::before,
+      .file[data-format=Longitudinal\ Graph\ Analysis\ TGZ]::before,
+      .file[data-format=MARC]::before,
+      .file[data-format=MARC\ Binary]::before,
+      .file[data-format=MARC\ Source]::before,
+      .file[data-format=Metadata]::before,
+      .file[data-format=Metadata\ Log]::before,
+      .file[data-format=MusicBrainz\ Metadata]::before,
+      .file[data-format=Name\ Metadata]::before,
+      .file[data-format=OCLC\ xISBN\ JSON]::before,
+      .file[data-format=OCLC\ xISBN\ ZIP]::before,
+      .file[data-format=Parsed\ GZ]::before,
+      .file[data-format=PersonalArchiveLog]::before,
+      .file[data-format=Preliminary\ Scandata]::before,
+      .file[data-format=Scandata]::before,
+      .file[data-format=Scandata\ JSON]::before,
+      .file[data-format=Scan\ Factors]::before,
+      .file[data-format=Scribe\ Scandata\ ZIP]::before,
+      .file[data-format=Segment\ Data]::before,
+      .file[data-format=Segments]::before,
+      .file[data-format=SHNtool\ MD5\ Checksums]::before,
+      .file[data-format=Simple\ File\ Verification]::before,
+      .file[data-format=Spectogram]::before,
+      .file[data-format=Structural\ Metadata]::before,
+      .file[data-format=SubRip]::before,
+      .file[data-format=Symlink\ Instructions]::before,
+      .file[data-format=Tab-Separated\ Values]::before,
+      .file[data-format=TBRC\ Outline]::before,
+      .file[data-format=TV\ Clips\ JSON]::before,
+      .file[data-format=TV\ Plays\ JSON]::before,
+      .file[data-format=TV\ Electronic\ Program\ Guide]::before,
+      .file[data-format=TV\ Text\ Stream]::before,
+      .file[data-format=Video\ Index]::before,
+      .file[data-format=Webex\ Advanced\ Recording\ File]::before,
+      .file[data-format=What.CD\ JSON]::before,
+      .file[data-format=Zotero\ RDF]::before {
+        content: '\1F4D1';
+      }
+      .file[data-format=Audacity\ Project]::before,
+      .file[data-format=Flash\ Authoring]::before,
+      .file[data-format=Android\ Package\ Archive]::before,
+      .file[data-format=Berkeley\ DB\ Java\ Edition]::before,
+      .file[data-format=Excel]::before,
+      .file[data-format=Powerpoint]::before,
+      .file[data-format=OpenDocument\ Spreadsheet]::before,
+      .file[data-format=PalmOS\ Database]::before {
+        content: '\1F4BC';
+      }
+      .file[data-format=Windows\ Executable]::before,
+      .file[data-format=Shockwave\ Flash]::before,
+      .file[data-format=Windows\ Screensaver]::before {
+        content: '\26A1';
+      }
+      .file[data-format=Archive\ BitTorrent]::before,
+      .file[data-format=BitTorrent]::before {
+        content: '\1F300';
+      }
       .file.folder::before {
         content: '\1F4C2';
+      }
+      .file.folder.item::before {
+        content: '\1F5C3';
       }
       .back {
         border: none;
