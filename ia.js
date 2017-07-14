@@ -2,14 +2,15 @@ define(function() {
 
   'use strict';
   
-  function search(terms, fields) {
+  function search(terms, fields, sort) {
     var cbNum = 0;
     do { cbNum++; } while (('cb' + cbNum) in window);
     var url = '//archive.org/advancedsearch.php?q=' + encodeURIComponent(terms)
       + '&callback=cb' + cbNum
-      + '&fl[]=' + (fields || ['identifier']).join(',')
+      + '&fl[]=' + (fields || ['identifier']).join('&fl[]=')
       + '&rows=50'
       + '&page=1'
+      + '&sort[]=' + (sort || ['identifier']).join('&sort[]=')
       + '&output=json';
     return new Promise(function(resolve, reject) {
       var script = document.createElement('SCRIPT');
