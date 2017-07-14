@@ -37,7 +37,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
       for (var i = 0; i < results.length; i++) {
         var element = document.createElement('A');
         element.setAttribute('href', '#/' + results[i].identifier + '/');
-        element.className = 'file folder';
+        element.className = 'file folder item';
         element.innerText = results[i].identifier;
         fileContainer.appendChild(element);
       }
