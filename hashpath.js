@@ -42,6 +42,37 @@ define(function() {
   
   read();
   
+  function encodePath() {
+    var parts = hashpath.parts;
+    var query = hashpath.query;
+    for (var i = 0; i < arguments.length; i++) {
+      if (Array.isArray(arguments[i])) {
+        parts = arguments[i];
+      }
+      else if (typeof arguments[i] === 'object' && arguments[i] !== null) {
+        query = arguments[i];
+      }
+    }
+    var encoded = '/' + parts.join('/');
+    if (encoded !== '/') encoded += '/';
+    var paramNames = Object.keys(query);
+    if (paramNames.length !== 0) {
+      encoded += '?' + paramNames.map(function(paramName) {
+        if (query[paramName] === true) return paramName;
+        return paramName = '=' + query[paramName];
+      });
+    }
+    return encoded;
+  }
+  
+  hashpath.navigate = function() {
+    location.hash = '#' + encodePath.apply(null, arguments);
+  };
+  
+  hashpath.setCanonical = function() {
+    history.replaceState(undefined, undefined, '#' + encodePath.apply(null, arguments));
+  };
+  
   return hashpath;
   
 });
