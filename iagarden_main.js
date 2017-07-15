@@ -1,4 +1,4 @@
-requirejs(['domReady!', 'ia'], function(domReady, ia) {
+requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
 
   'use strict';
   
@@ -7,7 +7,7 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
   }
   
   if (/\/index\.html$/i.test(location.pathname)) {
-    history.replaceState(undefined, undefined, './' + location.hash);
+    history.replaceState(undefined, undefined, './' + location.search + location.hash);
   }
   
   function loadWhile(promise) {
@@ -62,34 +62,20 @@ requirejs(['domReady!', 'ia'], function(domReady, ia) {
   }
   
   function loadHash() {
-    var parts = location.hash.replace(/^#/, '').split('?', 2);
-    var pathParts = parts[0].split('/').filter(function(v) { return !!v; });
-    var params = Object.create(null);
-    if (parts[1]) {
-      parts[1].split('&').forEach(function(param) {
-        var pair = param.split('=', 2);
-        params[pair[0]] = pair.length === 1 ? true : pair[1];
-      });
-    }
-    console.log(pathParts, params);
-    
-    if (pathParts.length === 0 || !/^[a-zA-Z0-9_\.\-]+$/.test(pathParts[0])) {
-      hash = localStorage.getItem('lastValidHash') || '#/amigaformat045disk_1993-04/';
-      history.replaceState(undefined, undefined, hash);
-      loadHash();
+    if (hashpath.parts.length === 0) {
+      hashpath.navigate(['amigaformat045disk_1993-04'], {});
       return;
     }
     
-    loadWhile(ia.getItemRecord(pathParts[0]).then(function(itemRecord) {
+    loadWhile(ia.getItemRecord(hashpath.parts[0]).then(function(itemRecord) {
       if (itemRecord === null) {
-        return ia.normalizeItemName(pathParts[0])
+        return ia.normalizeItemName(hashpath.parts[0])
         .then(function(normalized) {
           if (normalized === null) {
             document.body.classList.add('notfound');
             return;
           }
-          pathParts[0] = normalized;
-          history.replaceState(undefined, undefined, '#/' + pathParts.map(function(v) { return v + '/'; }));
+          hashpath.setCanonical([normalized].concat(hashpath.parts.slice(1)));
           loadHash();
         });
       }
