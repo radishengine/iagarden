@@ -61,7 +61,7 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
           element.setAttribute('href', '#/' + itemRecord.identifier + '/' + folder + '/');
           element.className = 'file folder';
           element.dataset.folder = pathParts.slice(0, i-1).join('/');
-          element.dataset.filename = element.innerText = pathParts[i+1];
+          element.dataset.filename = element.innerText = pathParts[i-1];
           fileContainer.appendChild(element);
         }
         var element = document.createElement('A');
