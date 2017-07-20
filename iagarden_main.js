@@ -50,14 +50,27 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
     return ia.getFileRecords(itemRecord.identifier)
     .then(function(files) {
       var insensitiveMatch;
+      var addedFolders = Object.create(null);
       files.forEach(function(fileInfo) {
+        var pathParts = fileInfo.name.split('/');
+        if (pathParts.length > 1) {
+          var folder = pathParts.slice(0, -1).join('/');
+          if (!(folder in addedFolders)) {
+            addedFolders[folder] = true;
+            var element = document.createElement('A');
+            element.setAttribute('href', '#/' + itemRecord.identifier + '/' + folder + '/');
+            element.className = 'file folder';
+            element.dataset.folder = pathParts.slice(0, -2).join('/');
+            element.dataset.filename = element.innerText = pathParts[pathParts.length-2];
+            fileContainer.appendChild(element);
+          }
+        }
         var element = document.createElement('A');
         element.setAttribute('href', '#/' + itemRecord.identifier + '/' + fileInfo.name);
         element.className = 'file';
         Object.assign(element.dataset, fileInfo);
-        var pathParts = fileInfo.name.match(/^(.*\/)?([^\/+]+)$/);
-        element.dataset.folder = '/' + (pathParts[1] || '');
-        element.dataset.filename = element.innerText = pathParts[2];
+        element.dataset.folder = pathParts.slice(0, -1).join('/');
+        element.dataset.filename = element.innerText = pathParts.slice(-1)[0];
         fileContainer.appendChild(element);
       });
     });
