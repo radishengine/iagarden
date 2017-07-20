@@ -55,7 +55,9 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
         element.setAttribute('href', '#/' + itemRecord.identifier + '/' + fileInfo.name);
         element.className = 'file';
         Object.assign(element.dataset, fileInfo);
-        element.innerText = fileInfo.name;
+        var pathParts = fileInfo.name.match(/^(.*\/)?([^\/+]+)$/);
+        element.dataset.folder = '/' + (pathParts[1] || '');
+        element.dataset.filename = element.innerText = pathParts[2];
         fileContainer.appendChild(element);
       });
     });
