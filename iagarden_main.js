@@ -53,7 +53,7 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
       var addedFolders = Object.create(null);
       files.forEach(function(fileInfo) {
         var pathParts = fileInfo.name.split('/');
-        for (var i = 1; i < pathParts.length-1; i++) {
+        for (var i = 1; i < pathParts.length; i++) {
           var folder = pathParts.slice(0, i).join('/');
           if (folder in addedFolders) continue;
           addedFolders[folder] = true;
