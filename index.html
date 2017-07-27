@@ -385,10 +385,7 @@
       .controls {
         display: none;
       }
-      body:not(.notfound) > #notfound {
-        display: none;
-      }
-      body.notfound > #content {
+      body > article:not(.active) {
         display: none;
       }
     </style>
@@ -398,10 +395,15 @@
       <h1>JavaScript Required</h1>
       JavaScript is required for this application.
     </noscript>
-    <div id='notfound'>
+    <article id='/'>
+      <a href='#/!LOCAL/'>Local files</a>
+    </article>
+    <article id='/!LOCAL/'>
+    </article>
+    <article id='/!404'>
       <h1>404 Page Not Found</h1>
-    </div>
-    <div id='content'>
+    </article>
+    <article id='content-template' class='content'>
       <button class='back' id='back'>Back</button>
       <h1 id='title'></h1>
       <div class='text controls'>
@@ -454,7 +456,7 @@
         <button id='download-zip'>Download .ZIP</button>
       </div>
       <div class='files' id='files'></div>
-    </div>
+    </article>
     <div id='loadlayer'>
       <style>
         .spinner {
