@@ -1,13 +1,23 @@
+
+var normalizedPath = location.pathname.replace(/\/index\.html$/i, '/');
+var normalizedHash = location.hash.replace(/^#?$/, '#/');
+var normalizedQuery = location.search || '?';
+var hashQueryPos = normalizedHash.indexOf('?');
+if (hashQueryPos !== -1) {
+  normalizedQuery += (normalizedQuery.length > 1 ? '&' : '') + normalizedHash.slice(hashQueryPos + 1);
+  normalizedHash = normalizedHash.slice(0, hashQueryPos);
+}
+if (normalizedQuery === '?') normalizedQuery = '';
+if (normalizedHash === '#/') normalizedHash = '#/amigaformat045disk_1993-04/';
+
+history.replaceState(undefined, undefined, normalizedPath + normalizedHash + normalizedQuery);
+
 requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
 
   'use strict';
   
   function regexEscape(str) {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
-  }
-  
-  if (/\/index\.html$/i.test(location.pathname)) {
-    history.replaceState(undefined, undefined, './' + location.search + location.hash);
   }
   
   function loadWhile(promise) {
@@ -76,11 +86,6 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
   }
   
   function loadHash() {
-    if (hashpath.parts.length === 0) {
-      hashpath.navigate(['amigaformat045disk_1993-04'], {});
-      return;
-    }
-    
     loadWhile(ia.getItemRecord(hashpath.parts[0]).then(function(itemRecord) {
       if (itemRecord === null) {
         return ia.normalizeItemName(hashpath.parts[0])
