@@ -40,7 +40,6 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
   function activate(activateMe) {
     if (typeof activateMe === 'string') {
       var el = document.getElementById(activateMe);
-      if (!el) return;
       activateMe = el;
     }
     var articles = document.querySelectorAll('body > article');
@@ -117,7 +116,7 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
       return;
     }
     if (/^\/!/.test(hashpath.full)) {
-      activate(hashpath.parts[0]);
+      activate('/' + hashpath.parts[0] + '/');
       return;
     }
     loadWhile(ia.getItemRecord(hashpath.parts[0]).then(function(itemRecord) {
