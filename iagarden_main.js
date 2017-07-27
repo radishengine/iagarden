@@ -111,12 +111,13 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
   }
   
   function loadHash() {
-    if (hashpath.full === '/') {
-      activate('/');
+    var existing = document.getElementById(hashpath.full);
+    if (existing) {
+      activate(existing);
       return;
     }
-    if (/^\/!/.test(hashpath.full)) {
-      activate('/' + hashpath.parts[0] + '/');
+    if (/^!/.test(hashpath[0])) {
+      activate('/!404/');
       return;
     }
     loadWhile(ia.getItemRecord(hashpath.parts[0]).then(function(itemRecord) {
