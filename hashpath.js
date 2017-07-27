@@ -8,7 +8,7 @@ define(function() {
     var path = location.hash.match(/^#?\/*([^?]*?)(?:\?&*(.*?)&*)?$/);
     var query = path[2];
     path = path[1];
-    hashpath.parts = Object.freeze(path.split(/\/+/g));
+    hashpath.parts = path.split(/\/+/g);
     hashpath.full = '/' + hashpath.parts.join('/');
     if (hashpath.parts.slice(-1)[0] === '') {
       hashpath.parts.length--;
@@ -21,6 +21,7 @@ define(function() {
         hashpath.query[kv[0]] = (kv.length === 1) ? true : kv.slice(1).join('=');
       });
     }
+    Object.freeze(hashpath.parts);
     Object.freeze(hashpath.query);
     var paramNames = Object.keys(hashpath.query);
     if (paramNames.length !== 0) {
