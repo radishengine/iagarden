@@ -1,4 +1,8 @@
 
+requirejs.config({
+  waitSeconds: 0, // no timeout
+});
+
 var normalizedPath = location.pathname.replace(/\/index\.html$/i, '/');
 var normalizedHash = location.hash;
 var normalizedQuery = location.search || '?';
