@@ -29,6 +29,7 @@ define(function() {
     if (canonical !== location.hash) {
       history.replaceState(undefined, undefined, canonical);
     }
+    hashpath.full = '/' + hashpath.parts.join('/');
   }
   
   window.addEventListener('hashchange', read);
