@@ -13,7 +13,6 @@ if (hashQueryPos !== -1) {
 }
 normalizedHash = normalizedHash.replace(/^#?$/, '#/');
 if (normalizedQuery === '?') normalizedQuery = '';
-if (normalizedHash === '#/') normalizedHash = '#/amigaformat045disk_1993-04/';
 
 history.replaceState(undefined, undefined, normalizedPath + normalizedHash + normalizedQuery);
 
