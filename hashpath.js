@@ -42,7 +42,7 @@ define(function() {
       history.replaceState(
         undefined,
         undefined,
-        location.hash.replace(/^#\/([^?]*?)\/?(\?.*)?$/, v ? '$1/$2' : '$1$2');
+        location.hash.replace(/^#\/([^?]*?)\/?(\?.*)?$/, v ? '$1/$2' : '$1$2'));
     },
   });
   
