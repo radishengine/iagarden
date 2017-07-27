@@ -43,7 +43,7 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
       if (!el) return;
       activateMe = el;
     }
-    var articles = document.querySelector('body > article');
+    var articles = document.querySelectorAll('body > article');
     var found = false;
     for (var i = 0; i < articles.length; i++) {
       if (articles[i] === activateMe) {
