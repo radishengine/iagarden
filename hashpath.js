@@ -9,11 +9,14 @@ define(function() {
     var query = path[2];
     path = path[1];
     hashpath.parts = Object.freeze(path.split(/\/+/g));
-    var canonical = '#/' + hashpath.parts.join('/');
+    hashpath.full = '/' + hashpath.parts.join('/');
+    if (hashpath.parts.slice(-1)[0] === '') {
+      hashpath.parts.length--;
+    }
+    var canonical = '#' + hashpath.full;
     hashpath.query = Object.create(null);
     if (query) {
       query.split(/&+/g).forEach(function(part) {
-        if (part === '') return;
         var kv = part.split('=');
         hashpath.query[kv[0]] = (kv.length === 1) ? true : kv.slice(1).join('=');
       });
@@ -29,8 +32,19 @@ define(function() {
     if (canonical !== location.hash) {
       history.replaceState(undefined, undefined, canonical);
     }
-    hashpath.full = '/' + hashpath.parts.join('/');
   }
+  
+  Object.defineProperty(hashpath, 'folderMode', {
+    get: function() {
+      return /^[^?]*\/(\?|$)/.test(location.hash);
+    },
+    set: function(v) {
+      history.replaceState(
+        undefined,
+        undefined,
+        location.hash.replace(/^([^?]*?)\/?(\?.*)?$/, v ? '$1/$2' : '$1$2');
+    },
+  });
   
   window.addEventListener('hashchange', read);
   
