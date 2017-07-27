@@ -1,12 +1,13 @@
 
 var normalizedPath = location.pathname.replace(/\/index\.html$/i, '/');
-var normalizedHash = location.hash.replace(/^#?$/, '#/');
+var normalizedHash = location.hash;
 var normalizedQuery = location.search || '?';
 var hashQueryPos = normalizedHash.indexOf('?');
 if (hashQueryPos !== -1) {
   normalizedQuery += (normalizedQuery.length > 1 ? '&' : '') + normalizedHash.slice(hashQueryPos + 1);
   normalizedHash = normalizedHash.slice(0, hashQueryPos);
 }
+normalizedHash = normalizedHash.replace(/^#?$/, '#/');
 if (normalizedQuery === '?') normalizedQuery = '';
 if (normalizedHash === '#/') normalizedHash = '#/amigaformat045disk_1993-04/';
 
