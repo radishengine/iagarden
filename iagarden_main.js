@@ -38,6 +38,28 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
     });
   }
   
+  function activate(activateMe) {
+    if (typeof activateMe === 'string') {
+      var el = document.getElementById(activateMe);
+      if (!el) return;
+      activateMe = el;
+    }
+    var articles = document.querySelector('body > article');
+    var found = false;
+    for (var i = 0; i < articles.length; i++) {
+      if (articles[i] === activateMe) {
+        articles[i].classList.add('active');
+        found = true;
+      }
+      else {
+        articles[i].classList.remove('active');
+      }
+    }
+    if (!found) {
+      document.getElementById('/!404/').classList.add('active');
+    }
+  }
+  
   function strOrArrayContains(sOrA, needle) {
     if (sOrA === needle) return true;
     if (!Array.isArray(needle)) return false;
@@ -91,6 +113,14 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
   }
   
   function loadHash() {
+    if (hashpath.full === '/') {
+      activate('/');
+      return;
+    }
+    if (/^\/!/.test(hashpath.full)) {
+      activate(hashpath.parts[0]);
+      return;
+    }
     loadWhile(ia.getItemRecord(hashpath.parts[0]).then(function(itemRecord) {
       if (itemRecord === null) {
         return ia.normalizeItemName(hashpath.parts[0])
