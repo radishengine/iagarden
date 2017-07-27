@@ -5,18 +5,17 @@ define(function() {
   var hashpath = {};
   
   function read() {
-    var split = location.hash.replace(/^#/, '').split('?', 2);
-    hashpath.parts = Object.freeze(split[0].split(/\/+/g).filter(function(part) {
-      return (part !== '');
-    }));
-    var canonical = '/' + hashpath.parts.join('/');
-    if (canonical !== '/') canonical += '/';
+    var path = location.hash.match(/^#?\/*([^?]*?)(?:\?&*(.*?)&*)?$/);
+    var query = path[2];
+    path = path[1];
+    hashpath.parts = Object.freeze(path.split(/\/+/g));
+    var canonical = '#/' + hashpath.parts.join('/');
     hashpath.query = Object.create(null);
-    if (split[1]) {
-      split[1].split(/&+/g).forEach(function(part) {
+    if (query) {
+      query.split(/&+/g).forEach(function(part) {
         if (part === '') return;
-        var kv = part.split('=', 2);
-        hashpath.query[kv[0]] = (kv.length === 1) ? true : kv[1];
+        var kv = part.split('=');
+        hashpath.query[kv[0]] = (kv.length === 1) ? true : kv.slice(1).join('=');
       });
     }
     Object.freeze(hashpath.query);
@@ -28,7 +27,7 @@ define(function() {
       }).join('&');
     }
     if (canonical !== location.hash) {
-      history.replaceState(undefined, undefined, '#' + canonical);
+      history.replaceState(undefined, undefined, canonical);
     }
   }
   
