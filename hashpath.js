@@ -15,7 +15,7 @@ define(function() {
     if (split[1]) {
       split[1].split(/&+/g).forEach(function(part) {
         if (part === '') return;
-        var kv = part.split('=', 1);
+        var kv = part.split('=', 2);
         hashpath.query[kv[0]] = (kv.length === 1) ? true : kv[1];
       });
     }
