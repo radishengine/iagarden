@@ -4,7 +4,39 @@
     <meta charset='utf-8'>
     <title>IA Garden</title>
     <script src='require.js' data-main='iagarden_main'></script>
+    <script type='text/x-template' id='template-nav-bar'>
+      <div class='navbar'>
+        <a href='#' class='parent' data-if='parentLink' data-subs='href=parentLink; text=parentName'>
+          Parent
+        </a>
+        <a href='#/'>
+          Home
+        </a>
+        <a href='#/!LOCAL/'>
+          Local Storage
+        </a>
+      </div>
+    </script>
     <style>
+      .navbar > a {
+        border: 1px solid black;
+        border-radius: 3px;
+        margin: 3px;
+        font-size: 9pt;
+        padding: 3px;
+        text-align: center;
+        box-shadow: 0 -10px 5px rgba(0,0,0, 0.1) inset, 0 3px 3px white inset;
+        background: #eee;
+        cursor: pointer;
+        text-decoration: none;
+        color: black;
+      }
+      .navbar > a[href="#\/"]::before {
+        content: '\1F3E0';
+      }
+      .navbar > a[href="#\/\!LOCAL\/"]::before {
+        content: '\1F4CB';
+      }
       .files {
         display: flex;
         flex-flow: row wrap;
