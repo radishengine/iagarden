@@ -24,6 +24,41 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
   }
   
+  function renderTemplate(id, context) {
+    var template = document.getElementById(id);
+    if (!template) throw new Error('template not found: ' + id);
+    var container = document.createElement('DIV');
+    container.innerHTML = template.text;
+    for (;;) {
+      var _if = container.querySelector('[data-if]');
+      if (!_if) break;
+      if (!context[_if.dataset.if]) {
+        _if.parentNode.removeChild(_if);
+      }
+      delete _if.dataset.if;
+    }
+    for (;;) {
+      var toSub = container.querySelector('[data-subs]');
+      if (!toSub) break;
+      var subs = toSub.dataset.subs.split(/;/g);
+      delete toSub.dataset.subs;
+      for (var i = 0; i < subs.length; i++) {
+        var pair = subs[i].match(/^\s*([^\s=]+)\s*=\s*(\S.*?)\s*$/);
+        if (pair) {
+          var attrName = pair[1];
+          var valueName = pair[2];
+          if (attrName === 'text') {
+            toSub.textContent = context[valueName] || '';
+          }
+          else {
+            toSub.setAttribute(attrName, context[valueName] || '');
+          }
+        }
+      }
+    }
+    return container;
+  }
+  
   function loadWhile(promise) {
     document.body.classList.add('loading');
     return Promise.resolve(promise)
@@ -208,6 +243,8 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
   }
   window.addEventListener('hashchange', loadHash);
   loadHash();
+  
+  document.body.appendChild(renderTemplate('template-nav-bar'));
   
   document.getElementById('back').onclick = function(e) {
     var hash = location.hash.match(/^(#.+\/)[^/]+\/?$/);
