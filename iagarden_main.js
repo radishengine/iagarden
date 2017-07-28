@@ -29,6 +29,7 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
     if (!template) throw new Error('template not found: ' + id);
     var container = document.createElement('DIV');
     container.innerHTML = template.text;
+    context = context || Object.create(null);
     for (;;) {
       var _if = container.querySelector('[data-if]');
       if (!_if) break;
