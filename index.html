@@ -4,19 +4,6 @@
     <meta charset='utf-8'>
     <title>IA Garden</title>
     <script src='require.js' data-main='iagarden_main'></script>
-    <script type='text/x-template' id='template-nav-bar'>
-      <div class='navbar'>
-        <a href='#' class='parent' data-if='parentLink' data-subs='href=parentLink; text=parentName'>
-          Parent
-        </a>
-        <a href='#/'>
-          Home
-        </a>
-        <a href='#/!LOCAL/'>
-          Local Storage
-        </a>
-      </div>
-    </script>
     <style>
       body {
         font-family: sans-serif;
@@ -429,78 +416,93 @@
       <h1>JavaScript Required</h1>
       JavaScript is required for this application.
     </noscript>
-    <article id='/'>
-      <a href='#/!LOCAL/'>Local files</a>
-    </article>
-    <article id='/!LOCAL/'>
-      <div>
-        <b>Note:</b>
-        Do not share links to files from this local storage area.
-        They are specific to your browser, and <b>will not work</b> for anyone else.
-      </div>
-      <div class='files'>
-        <a href='#/!LOCAL/?mode=newfolder' class='file folder'>
-          New Folder
+    <div id='templates' style='display:none'>
+      <div class='navbar'>
+        <a href='#' class='parent'>
+          Parent
+        </a>
+        <a href='#/'>
+          Home
+        </a>
+        <a href='#/!LOCAL/'>
+          Local Storage
         </a>
       </div>
-    </article>
-    <article id='/!404/'>
-      <h1>404 Page Not Found</h1>
-    </article>
-    <article id='content-template' class='content'>
-      <button class='back' id='back'>Back</button>
-      <h1 id='title'></h1>
-      <div class='text controls'>
-        <select>
-          <option>utf-8</option>
-          <option>utf-16be</option>
-          <option>utf-16le</option>
-          <option>ibm866</option>
-          <option>iso-8859-2</option>
-          <option>iso-8859-3</option>
-          <option>iso-8859-4</option>
-          <option>iso-8859-5</option>
-          <option>iso-8859-6</option>
-          <option>iso-8859-7</option>
-          <option>iso-8859-8</option>
-          <option>iso-8859-8i</option>
-          <option>iso-8859-10</option>
-          <option>iso-8859-13</option>
-          <option>iso-8859-14</option>
-          <option>iso-8859-15</option>
-          <option>iso-8859-16</option>
-          <option>koi8-r</option>
-          <option>koi8-u</option>
-          <option>macintosh</option>
-          <option>windows-874</option>
-          <option>windows-1250</option>
-          <option>windows-1251</option>
-          <option>windows-1252</option>
-          <option>windows-1253</option>
-          <option>windows-1254</option>
-          <option>windows-1255</option>
-          <option>windows-1256</option>
-          <option>windows-1257</option>
-          <option>windows-1258</option>
-          <option>x-mac-cyrillic</option>
-          <option>gbk</option>
-          <option>gb18030</option>
-          <option>hz-gb-2312</option>
-          <option>big5</option>
-          <option>euc-jp</option>
-          <option>iso-2022-jp</option>
-          <option>shift-jis</option>
-          <option>euc-kr</option>
-          <option>iso-2022-kr</option>
-        </select>
-        <label><input type='checkbox' id='ansi'> ANSI escapes</label>
-        <button id='download'>Download</button>
-        <button id='download-utf-8'>Download (UTF-8)</button>
-        <button id='download-original'>Download (Original)</button>
-        <button id='download-zip'>Download .ZIP</button>
-      </div>
-      <div class='files' id='files'></div>
-    </article>
+      <article class='home'>
+        <div data-template='.navbar'></div>
+        <a href='#/!LOCAL/'>Local files</a>
+      </article>
+      <article class='local-storage'>
+        <div data-template='.navbar'></div>
+        <div>
+          <b>Note:</b>
+          Do not share links to files from this local storage area.
+          They are specific to your browser, and <b>will not work</b> for anyone else.
+        </div>
+        <div class='files'>
+          <a href='#/!LOCAL/?mode=newfolder' class='file folder'>
+            New Folder
+          </a>
+        </div>
+      </article>
+      <article class='not-found'>
+        <h1>404 Not Found</h1>
+      </article>
+      <article class='content'>
+        <div data-template='.navbar'></div>
+        <h1 id='title'></h1>
+        <div class='text controls'>
+          <select>
+            <option>utf-8</option>
+            <option>utf-16be</option>
+            <option>utf-16le</option>
+            <option>ibm866</option>
+            <option>iso-8859-2</option>
+            <option>iso-8859-3</option>
+            <option>iso-8859-4</option>
+            <option>iso-8859-5</option>
+            <option>iso-8859-6</option>
+            <option>iso-8859-7</option>
+            <option>iso-8859-8</option>
+            <option>iso-8859-8i</option>
+            <option>iso-8859-10</option>
+            <option>iso-8859-13</option>
+            <option>iso-8859-14</option>
+            <option>iso-8859-15</option>
+            <option>iso-8859-16</option>
+            <option>koi8-r</option>
+            <option>koi8-u</option>
+            <option>macintosh</option>
+            <option>windows-874</option>
+            <option>windows-1250</option>
+            <option>windows-1251</option>
+            <option>windows-1252</option>
+            <option>windows-1253</option>
+            <option>windows-1254</option>
+            <option>windows-1255</option>
+            <option>windows-1256</option>
+            <option>windows-1257</option>
+            <option>windows-1258</option>
+            <option>x-mac-cyrillic</option>
+            <option>gbk</option>
+            <option>gb18030</option>
+            <option>hz-gb-2312</option>
+            <option>big5</option>
+            <option>euc-jp</option>
+            <option>iso-2022-jp</option>
+            <option>shift-jis</option>
+            <option>euc-kr</option>
+            <option>iso-2022-kr</option>
+          </select>
+          <label><input type='checkbox' id='ansi'> ANSI escapes</label>
+          <button id='download'>Download</button>
+          <button id='download-utf-8'>Download (UTF-8)</button>
+          <button id='download-original'>Download (Original)</button>
+          <button id='download-zip'>Download .ZIP</button>
+        </div>
+        <div class='files' id='files'></div>
+      </article>
+    </div>
     <div id='loadlayer'>
       <style>
         .spinner {
