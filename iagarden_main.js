@@ -24,42 +24,6 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
   }
   
-  function renderTemplate(id, context) {
-    var template = document.getElementById(id);
-    if (!template) throw new Error('template not found: ' + id);
-    var container = document.createElement('DIV');
-    container.innerHTML = template.text;
-    context = context || Object.create(null);
-    for (;;) {
-      var _if = container.querySelector('[data-if]');
-      if (!_if) break;
-      if (!context[_if.dataset.if]) {
-        _if.parentNode.removeChild(_if);
-      }
-      delete _if.dataset.if;
-    }
-    for (;;) {
-      var toSub = container.querySelector('[data-subs]');
-      if (!toSub) break;
-      var subs = toSub.dataset.subs.split(/;/g);
-      delete toSub.dataset.subs;
-      for (var i = 0; i < subs.length; i++) {
-        var pair = subs[i].match(/^\s*([^\s=]+)\s*=\s*(\S.*?)\s*$/);
-        if (pair) {
-          var attrName = pair[1];
-          var valueName = pair[2];
-          if (attrName === 'text') {
-            toSub.textContent = context[valueName] || '';
-          }
-          else {
-            toSub.setAttribute(attrName, context[valueName] || '');
-          }
-        }
-      }
-    }
-    return container;
-  }
-  
   function loadWhile(promise) {
     document.body.classList.add('loading');
     return Promise.resolve(promise)
@@ -72,6 +36,22 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
       return Promise.reject(r);
     });
   }
+  
+  function renderTemplate(templateSelector, id) {
+    var template = document.querySelector('#templates > ' + templateSelector).cloneNode(true);
+    var replacements = template.querySelector('[data-template]');
+    for (var i = 0; i < replacements.length; i++) {
+      replacements[i].parentNode.replaceChild(
+        replacements[i],
+        renderTemplate(replacements[i].dataset.template));
+    }
+    if (id) template.setAttribute('id', id);
+    return template;
+  }
+  
+  document.body.appendChild(renderTemplate('.home'. '/'));
+  document.body.appendChild(renderTemplate('.local-storage'. '/!LOCAL/'));
+  document.body.appendChild(renderTemplate('.not-found', '/!404/'));
   
   function activate(activateMe) {
     if (typeof activateMe === 'string') {
@@ -100,8 +80,8 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
     return sOrA.indexOf(needle) !== -1;
   }
   
-  function initCollection(itemRecord) {
-    var fileContainer = document.getElementById('files');
+  function initCollection(template, itemRecord) {
+    var fileContainer = template.querySelector('.files');
     fileContainer.innerHTML = '';
     return ia.getCollectionItems(itemRecord.identifier)
     .then(function(results) {
@@ -115,8 +95,8 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
     });
   }
   
-  function initItem(itemRecord) {
-    var fileContainer = document.getElementById('files');
+  function initItem(template, itemRecord) {
+    var fileContainer = template.querySelector('.files');
     fileContainer.innerHTML = '';
     return ia.getFileRecords(itemRecord.identifier)
     .then(function(files) {
@@ -168,14 +148,16 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
           loadHash();
         });
       }
-      document.getElementById('title').innerText = itemRecord.title || itemRecord.identifier;
+      var template = renderTemplate('.content', hashpath.full);
+      template.querySelector('.title').innerText = itemRecord.title || itemRecord.identifier;
+      document.body.appendChild(template);
+      activate(template);
       console.log(itemRecord);
-      document.body.classList.remove('notfound');
       if (itemRecord.mediatype === 'collection') {
-        return initCollection(itemRecord);
+        return initCollection(template, itemRecord);
       }
       else {
-        return initItem(itemRecord);
+        return initItem(template, itemRecord);
       }
     }));
     
@@ -244,25 +226,5 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
   }
   window.addEventListener('hashchange', loadHash);
   loadHash();
-  
-  document.body.appendChild(renderTemplate('template-nav-bar'));
-  
-  document.getElementById('back').onclick = function(e) {
-    var hash = location.hash.match(/^(#.+\/)[^/]+\/?$/);
-    if (hash) {
-      location.hash = hash[1];
-      return;
-    }
-    var itemName = location.hash.match(/^#\/?([^\/]+)\/?$/);
-    if (itemName) {
-      document.body.classList.add('loading');
-      ia.getItemRecord(itemName[1]).then(function(item) {
-        document.body.classList.remove('loading');
-        var collection = item.collection;
-        if (Array.isArray(collection)) collection = collection[0];
-        if (collection) location.hash = '#/' + collection + '/';
-      });
-    }
-  };
   
 });
