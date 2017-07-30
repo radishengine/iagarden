@@ -20,6 +20,13 @@
         text-decoration: none;
         color: black;
       }
+      .navbar > a[href="#\/\!404\/"] {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      .navbar > a.parent::before {
+        content: '\1F53C';
+      }
       .navbar > a[href="#\/"]::before {
         content: '\1F3E0';
       }
