@@ -42,8 +42,8 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
     var replacements = template.querySelectorAll('[data-template]');
     for (var i = 0; i < replacements.length; i++) {
       replacements[i].parentNode.replaceChild(
-        replacements[i],
-        renderTemplate(replacements[i].dataset.template));
+        renderTemplate(replacements[i].dataset.template),
+        replacements[i]);
     }
     if (id) template.setAttribute('id', id);
     return template;
