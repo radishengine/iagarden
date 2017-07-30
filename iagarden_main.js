@@ -50,7 +50,9 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
   }
   
   document.body.appendChild(renderTemplate('.home', '/'));
-  document.body.appendChild(renderTemplate('.local-storage', '/!LOCAL/'));
+  var localTemplate = renderTemplate('.local-storage', '/!LOCAL/');
+  localTemplate.querySelector('a.parent').href = '#/');
+  document.body.appendChild(localTemplate);
   document.body.appendChild(renderTemplate('.not-found', '/!404/'));
   
   function activate(activateMe) {
