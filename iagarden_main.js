@@ -39,7 +39,7 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
   
   function renderTemplate(templateSelector, id) {
     var template = document.querySelector('#templates > ' + templateSelector).cloneNode(true);
-    var replacements = template.querySelector('[data-template]');
+    var replacements = template.querySelectorAll('[data-template]');
     for (var i = 0; i < replacements.length; i++) {
       replacements[i].parentNode.replaceChild(
         replacements[i],
