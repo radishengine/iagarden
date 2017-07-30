@@ -51,7 +51,7 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
   
   document.body.appendChild(renderTemplate('.home', '/'));
   var localTemplate = renderTemplate('.local-storage', '/!LOCAL/');
-  localTemplate.querySelector('a.parent').href = '#/');
+  localTemplate.querySelector('a.parent').setAttribute('href', '#/');
   document.body.appendChild(localTemplate);
   document.body.appendChild(renderTemplate('.not-found', '/!404/'));
   
@@ -152,7 +152,7 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
       }
       var template = renderTemplate('.content', hashpath.full);
       if (hashpath.parts.length > 0) {
-        template.querySelector('a.parent').href = '#' + hashpath.full.replace(/\/[^\/]+\/?$/, '/');
+        template.querySelector('a.parent').setAttribute('href', '#' + hashpath.full.replace(/\/[^\/]+\/?$/, '/'));
       }
       template.querySelector('.title').innerText = itemRecord.title || itemRecord.identifier;
       document.body.appendChild(template);
