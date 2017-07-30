@@ -149,6 +149,9 @@ requirejs(['domReady!', 'ia', 'hashpath'], function(domReady, ia, hashpath) {
         });
       }
       var template = renderTemplate('.content', hashpath.full);
+      if (hashpath.parts.length > 0) {
+        template.querySelector('a.parent').href = '#' + hashpath.full.replace(/\/[^\/]+\/?$/, '/');
+      }
       template.querySelector('.title').innerText = itemRecord.title || itemRecord.identifier;
       document.body.appendChild(template);
       activate(template);
